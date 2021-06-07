@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import { StyleSheet, View, TextInput, Button, FlatList, ActivityIndicator } from 'react-native'
+import { StyleSheet, View, TextInput, Button, ActivityIndicator } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import { Film } from '../Helpers/filmsData'
 import FilmList from './FilmList'

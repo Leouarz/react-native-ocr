@@ -6,12 +6,14 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Search from '../Components/Search'
 import FilmDetail from '../Components/FilmDetail'
 import Favorites from '../Components/Favorites'
+import News from '../Components/News'
 
 export type RootStackParamList = {
   Search: undefined
   FilmDetail: { idFilm: number }
   Favorites: undefined
   Test: undefined
+  News: undefined
 };
 
 const StackSearch = createStackNavigator<RootStackParamList>();
@@ -33,6 +35,17 @@ function FavoritesStackNavigator(){
         <StackFavorites.Screen name="Favorites" component={Favorites} options={{ title: 'Favoris' }}/>
         <StackFavorites.Screen name="FilmDetail" component={FilmDetail} options={{ title: 'Détail' }}/>
       </StackFavorites.Navigator>
+  )
+}
+
+const StackNews = createStackNavigator<RootStackParamList>();
+
+function NewsStackNavigator(){
+  return(
+      <StackNews.Navigator initialRouteName="News">
+        <StackNews.Screen name="News" component={News} options={{ title: 'Nouveautés' }}/>
+        <StackNews.Screen name="FilmDetail" component={FilmDetail} options={{ title: 'Détail' }}/>
+      </StackNews.Navigator>
   )
 }
 
@@ -64,6 +77,16 @@ export default function MoviesTabNavigator(){
           options={{tabBarIcon: () => 
             <Image
               source={require('../Images/ic_favorite.png')}
+              style={styles.icon}
+            />
+          }}
+        />
+        <Tab.Screen
+          name="News" 
+          component={NewsStackNavigator}
+          options={{tabBarIcon: () => 
+            <Image
+              source={require('../Images/ic_fiber_new.png')}
               style={styles.icon}
             />
           }}

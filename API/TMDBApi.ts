@@ -13,6 +13,16 @@ export async function getFilmsFromApiWithSearchedText (text:string, page:number)
     }
 }
 
+export async function getBestFilmsFromApi  (page:number) {
+    const url = 'https://api.themoviedb.org/3/discover/movie?api_key=' + API_TOKEN + '&vote_count.gte=1000&sort_by=release_date.desc&language=fr&page='+ page
+    try{
+        let response = await fetch(url)
+        return response.json()
+    }catch(e){
+        console.error(e)
+    }
+}
+
 export async function getFilmDetailFromApi  (id:number) {
     const url = 'https://api.themoviedb.org/3/movie/' + id + '?api_key=' + API_TOKEN + '&language=fr'
     try{
