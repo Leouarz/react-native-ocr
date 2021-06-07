@@ -6,6 +6,7 @@ import { RootStackParamList } from '../Navigation/Navigation'
 import { getFilmDetailFromApi, getImageFromApi } from '../API/TMDBApi'
 import { Film } from '../Helpers/filmsData'
 import { actions } from '../Store/Actions/favorite'
+import EnlargeShrink from '../Animations/EnlargeShrink'
 
 
 export default function FilmDetail(){
@@ -39,19 +40,23 @@ export default function FilmDetail(){
         }
     }
     const displayFavoriteImage = () => {
-        var sourceImage = require('../Images/ic_favorite_border.png')
+        let sourceImage = require('../Images/ic_favorite_border.png')
+        let shouldEnlarge = false
         if (film && stateFavorite.favoritesFilm.findIndex(item => item.id === film.id) !== -1) {
             sourceImage = require('../Images/ic_favorite.png')
+            shouldEnlarge = true
         }
         return (
-            <Image
-                style={styles.favorite_image}
-                source={sourceImage}
-            />
+            <EnlargeShrink shouldEnlarge={shouldEnlarge}>
+                <Image
+                    style={styles.favorite_image}
+                    source={sourceImage}
+                />
+            </EnlargeShrink>
         )
     }
     const DisplayFloatingActionButton = () => {
-        if (film != undefined && Platform.OS === 'android') {
+        if (film != undefined) {
           return (
             <TouchableOpacity
               style={styles.share_touchable_floatingactionbutton}
@@ -157,9 +162,10 @@ const styles = StyleSheet.create({
     favorite_container: {
         alignItems: 'center',
     },
-    favorite_image: {
-        width: 40,
-        height: 40
+    favorite_image:{
+        flex: 1,
+        width: undefined,
+        height: undefined
     },
     share_touchable_floatingactionbutton: {
         position: 'absolute',

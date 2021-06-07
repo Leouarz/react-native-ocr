@@ -6,7 +6,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Search from '../Components/Search'
 import FilmDetail from '../Components/FilmDetail'
 import Favorites from '../Components/Favorites'
-import Test from '../Components/Test'
 
 export type RootStackParamList = {
   Search: undefined
@@ -67,13 +66,6 @@ export default function MoviesTabNavigator(){
               source={require('../Images/ic_favorite.png')}
               style={styles.icon}
             />
-          }}
-        />
-        <Tab.Screen
-          name="Test"
-          component={Test}
-          options={{tabBarIcon: () => 
-            <Text>Test</Text>
           }}
         />
       </Tab.Navigator>
